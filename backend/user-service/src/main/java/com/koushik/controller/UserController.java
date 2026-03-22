@@ -2,6 +2,7 @@ package com.koushik.controller;
 
 import com.koushik.model.User;
 import com.koushik.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping("/api/users")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody @Valid User user){
         return userRepository.save(user);
     }
 
