@@ -1,5 +1,6 @@
 package com.koushik.controller;
 
+import com.koushik.exception.UserException;
 import com.koushik.model.User;
 import com.koushik.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -31,15 +32,15 @@ public class UserController {
         if (opt.isPresent()){
             return opt.get();
         }
-        throw new Exception("User not present!");
+        throw new UserException("User not present!");
     }
 
     @PutMapping("/api/users/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable Long id){
+    public User updateUser(@RequestBody User user, @PathVariable Long id) throws Exception {
         Optional<User> opt = userRepository.findById(id);
 
         if(opt.isEmpty()){
-            throw new RuntimeException("User not found with id "+id);
+            throw new UserException("User not found with id "+id);
         }
         User existingUser = opt.get();
 
@@ -52,10 +53,10 @@ public class UserController {
     }
 
     @DeleteMapping("/api/users/{id}")
-    public String deleteUser(@PathVariable Long id){
+    public String deleteUser(@PathVariable Long id) throws Exception {
         Optional<User> opt = userRepository.findById(id);
         if(opt.isEmpty())
-            throw new RuntimeException("User Not found for id "+id);
+            throw new UserException("User Not found for id "+id);
 
         userRepository.deleteById(opt.get().getId());
         return "User deleted successfully!";
