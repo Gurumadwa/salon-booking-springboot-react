@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -23,3 +22,9 @@ public class GlobalExceptionHandler {
     }
 
 }
+
+
+//{
+//        "message": "User not found",
+//        "error": "uri=/users/10"     error values this coz clientInfo is set to false above
+//}
