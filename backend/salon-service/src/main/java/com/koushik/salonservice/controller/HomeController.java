@@ -1,4 +1,4 @@
-package com.koushik.salon_service.controller;
+package com.koushik.salonservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ public class HomeController {
 
     @GetMapping
     public String HomeControllerHandler(){
-        return "Hi, from salon booking Salon service";
+        return "Hi, from Salon service";
     }
 
 }

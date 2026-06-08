@@ -1,4 +1,4 @@
-package com.koushik.salon_service;
+package com.koushik.salonservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

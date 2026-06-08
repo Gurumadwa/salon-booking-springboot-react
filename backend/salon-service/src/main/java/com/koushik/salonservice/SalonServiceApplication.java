@@ -1,4 +1,4 @@
-package com.koushik.salon_service;
+package com.koushik.salonservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
