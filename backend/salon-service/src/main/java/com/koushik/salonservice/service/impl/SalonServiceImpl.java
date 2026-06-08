@@ -17,32 +17,65 @@ public class SalonServiceImpl implements SalonService {
     private final SalonRepository salonRepository;
 
     @Override
-    public Salon createSalon(SalonDto salon, UserDto user) {
-        return null;
+    public Salon createSalon(SalonDto reqData, UserDto user) {
+
+        Salon salon = new Salon();
+
+        salon.setName(reqData.getName());
+        salon.setEmail(reqData.getEmail());
+        salon.setCity(reqData.getCity());
+        salon.setAddress(reqData.getAddress());
+        salon.setImages(reqData.getImages());
+        salon.setOpenTime(reqData.getOpenTime());
+        salon.setCloseTime(reqData.getCloseTime());
+        salon.setOwnerId(user.getId());                 //set id from user dto
+        salon.setPhoneNumber(reqData.getPhoneNumber());
+
+        return salonRepository.save(salon);
     }
 
     @Override
-    public Salon updateSalon(SalonDto salon, UserDto user, Long salonId) {
-        return null;
+    public Salon updateSalon(SalonDto salon, UserDto user, Long salonId) throws Exception {
+
+        Salon existingSalon = salonRepository.findById(salonId).orElse(null);
+
+        if(existingSalon != null && salon.getOwnerId().equals(user.getId())){
+            existingSalon.setName(salon.getName());
+            existingSalon.setCity(salon.getCity());
+            existingSalon.setAddress(salon.getAddress());
+            existingSalon.setEmail(salon.getEmail());
+            existingSalon.setImages(salon.getImages());
+            existingSalon.setOwnerId(user.getId());             //set id from user dto
+            existingSalon.setPhoneNumber(salon.getPhoneNumber());
+            existingSalon.setOpenTime(salon.getOpenTime());
+            existingSalon.setCloseTime(salon.getCloseTime());
+        }
+        throw new Exception("Salon does not exist");
     }
 
     @Override
     public List<Salon> getAllSalons() {
-        return List.of();
+        return salonRepository.findAll();
     }
 
     @Override
-    public Salon getSalonBySalonId(Long salonId) {
-        return null;
+    public Salon getSalonBySalonId(Long salonId) throws Exception {
+
+        Salon salon = salonRepository.findById(salonId).orElse(null);
+
+        if(salon == null){
+            throw new Exception("Salon not found");
+        }
+        return salon;
     }
 
     @Override
     public Salon getSalonByOwnerId(Long ownerId) {
-        return null;
+        return salonRepository.findByOwnerId(ownerId);
     }
 
     @Override
     public List<Salon> searchSalonByCity(String city) {
-        return List.of();
+        return salonRepository.searchSalons(city);
     }
 }
