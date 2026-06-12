@@ -39,7 +39,11 @@ public class SalonServiceImpl implements SalonService {
 
         Salon existingSalon = salonRepository.findById(salonId).orElse(null);
 
-        if(existingSalon != null && salon.getOwnerId().equals(user.getId())){
+        if(!existingSalon.getOwnerId().equals(user.getId())){
+            throw new Exception("You are not authorized to update this salon");
+        }
+
+        if(existingSalon != null){
             existingSalon.setName(salon.getName());
             existingSalon.setCity(salon.getCity());
             existingSalon.setAddress(salon.getAddress());
@@ -49,6 +53,8 @@ public class SalonServiceImpl implements SalonService {
             existingSalon.setPhoneNumber(salon.getPhoneNumber());
             existingSalon.setOpenTime(salon.getOpenTime());
             existingSalon.setCloseTime(salon.getCloseTime());
+
+            return salonRepository.save(existingSalon);
         }
         throw new Exception("Salon does not exist");
     }

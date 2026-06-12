@@ -1,4 +1,4 @@
-package com.koushik.salonservice.payload.dto;
+package com.koushik.categoryservice.payload.dto;
 
 import lombok.Data;
 
