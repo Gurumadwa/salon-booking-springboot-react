@@ -12,10 +12,12 @@ public interface ServiceOfferingService {
 
     ServiceOffering createService(ServiceOfferingDto serviceOfferingDto, SalonDto salonDto, CategoryDto categoryDto);
 
-    ServiceOffering updateService(Long ServiceId, ServiceOfferingDto serviceOfferingDto);
+    ServiceOffering updateService(Long ServiceId, ServiceOfferingDto serviceOfferingDto) throws Exception;
 
     Set<ServiceOffering> getAllServiceBySalonId(Long salonId, Long categoryId);
 
     Set<ServiceOffering> getAllServiceById(Set<Long> ids);
+
+    ServiceOffering getServiceById(Long id) throws Exception;
 
 }

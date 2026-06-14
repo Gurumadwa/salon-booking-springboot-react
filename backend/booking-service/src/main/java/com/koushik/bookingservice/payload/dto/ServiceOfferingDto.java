@@ -1,4 +1,4 @@
-package com.koushik.serviceofferingservice.payload.dto;
+package com.koushik.bookingservice.payload.dto;
 
 import lombok.Data;
 
